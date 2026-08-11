@@ -1,0 +1,16 @@
+name: Build
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - run: |
+          sudo apt update -y
+          sudo apt install -y libx11-dev opencl-c-headers libxxf86vm-dev libxrandr-dev libxcursor-dev
+          make
+      - uses: actions/upload-artifact@v7
+        with:
+          path: lwjgl-platform-natives-linux.jar
